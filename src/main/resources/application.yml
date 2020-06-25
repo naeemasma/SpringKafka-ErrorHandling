@@ -1,0 +1,33 @@
+server:
+  port: 9000
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      
+app:
+  consumer:
+    subscribed-to: 
+      topic: test    
+    group-id: test-consumer-group
+    publish-to:
+      topic: test1
+  retry: 
+    topic: test.retry
+    attempts: 2
+    interval: 1000
+  dlt: 
+    topic: test.DLT
+
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    com.example: INFO
